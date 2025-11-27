@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import { DataTable } from '../shared/components';
-import { userService } from '../services/userService';
-import { postService } from '../services/postService';
-import type { User } from '../services/userService';
 import type { Post } from '../services/postService';
 import '../styles/components.css';
 import { Button } from '@/shared/ui/button';
@@ -24,9 +21,17 @@ import {
   type ArticleFormData,
 } from '@/features/article/components/articleForm/ArticleForm';
 import { Alert } from '@/shared/ui/Alert';
-
-type EntityType = 'user' | 'post';
-type Entity = User | Post;
+import {
+  type EntityType,
+  type Entity,
+  ManagementService,
+  useAlert,
+  getStats,
+  getTableColumns,
+  entityToFormData,
+  getSuccessMessage,
+  getEntityLabel,
+} from '@/features/management';
 
 export const ManagementPage: React.FC = () => {
   const [entityType, setEntityType] = useState<EntityType>('post');
@@ -34,99 +39,65 @@ export const ManagementPage: React.FC = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<Entity | null>(null);
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
-  const [showErrorAlert, setShowErrorAlert] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
 
   const [userFormData, setUserFormData] = useState<UserFormData>({});
   const [postFormData, setPostFormData] = useState<ArticleFormData>({});
 
+  const {
+    alertState,
+    showSuccessAlert,
+    showErrorAlert,
+    hideSuccessAlert,
+    hideErrorAlert,
+    resetAlerts,
+  } = useAlert();
+
   useEffect(() => {
     loadData();
-    setUserFormData({});
-    setPostFormData({});
+    resetFormData();
+    resetAlerts();
     setIsCreateModalOpen(false);
     setIsEditModalOpen(false);
     setSelectedItem(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entityType]);
+
+  const resetFormData = () => {
+    setUserFormData({});
+    setPostFormData({});
+  };
 
   const loadData = async () => {
     try {
-      let result: Entity[];
-
-      if (entityType === 'user') {
-        result = await userService.getAll();
-      } else {
-        result = await postService.getAll();
-      }
-
+      const result = await ManagementService.loadData(entityType);
       setData(result);
     } catch (error: any) {
-      setErrorMessage('데이터를 불러오는데 실패했습니다');
-      setShowErrorAlert(true);
+      showErrorAlert('데이터를 불러오는데 실패했습니다');
     }
   };
 
   const handleCreate = async () => {
     try {
-      if (entityType === 'user') {
-        await userService.create({
-          username: userFormData.username!,
-          email: userFormData.email!,
-          role: (userFormData.role || 'user') as 'admin' | 'moderator' | 'user',
-          status: (userFormData.status || 'active') as
-            | 'active'
-            | 'inactive'
-            | 'suspended',
-        });
-      } else {
-        await postService.create({
-          title: postFormData.title!,
-          content: postFormData.content || '',
-          author: postFormData.author!,
-          category: postFormData.category!,
-          status: (postFormData.status || 'draft') as
-            | 'draft'
-            | 'published'
-            | 'archived',
-        });
-      }
+      const formData = entityType === 'user' ? userFormData : postFormData;
+      await ManagementService.createEntity(entityType, formData);
 
       await loadData();
       setIsCreateModalOpen(false);
-      setUserFormData({});
-      setPostFormData({});
-      setAlertMessage(
-        `${entityType === 'user' ? '사용자' : '게시글'}가 생성되었습니다`,
-      );
-      setShowSuccessAlert(true);
+      resetFormData();
+      showSuccessAlert(getSuccessMessage(entityType, 'create'));
     } catch (error: any) {
-      setErrorMessage(error.message || '생성에 실패했습니다');
-      setShowErrorAlert(true);
+      showErrorAlert(error.message || '생성에 실패했습니다');
     }
   };
 
   const handleEdit = (item: Entity) => {
     setSelectedItem(item);
+    const formData = entityToFormData(item, entityType);
 
     if (entityType === 'user') {
-      const user = item as User;
-      setUserFormData({
-        username: user.username,
-        email: user.email,
-        role: user.role,
-        status: user.status,
-      });
+      setUserFormData(formData as UserFormData);
     } else {
-      const post = item as Post;
-      setPostFormData({
-        title: post.title,
-        content: post.content,
-        author: post.author,
-        category: post.category,
-        status: post.status,
-      });
+      setPostFormData(formData as ArticleFormData);
     }
 
     setIsEditModalOpen(true);
@@ -136,43 +107,20 @@ export const ManagementPage: React.FC = () => {
     if (!selectedItem) return;
 
     try {
-      if (entityType === 'user') {
-        await userService.update(selectedItem.id, {
-          username: userFormData.username,
-          email: userFormData.email,
-          role: userFormData.role as 'admin' | 'moderator' | 'user' | undefined,
-          status: userFormData.status as
-            | 'active'
-            | 'inactive'
-            | 'suspended'
-            | undefined,
-        });
-      } else {
-        await postService.update(selectedItem.id, {
-          title: postFormData.title,
-          content: postFormData.content,
-          author: postFormData.author,
-          category: postFormData.category,
-          status: postFormData.status as
-            | 'draft'
-            | 'published'
-            | 'archived'
-            | undefined,
-        });
-      }
+      const formData = entityType === 'user' ? userFormData : postFormData;
+      await ManagementService.updateEntity(
+        entityType,
+        selectedItem.id,
+        formData,
+      );
 
       await loadData();
       setIsEditModalOpen(false);
-      setUserFormData({});
-      setPostFormData({});
+      resetFormData();
       setSelectedItem(null);
-      setAlertMessage(
-        `${entityType === 'user' ? '사용자' : '게시글'}가 수정되었습니다`,
-      );
-      setShowSuccessAlert(true);
+      showSuccessAlert(getSuccessMessage(entityType, 'update'));
     } catch (error: any) {
-      setErrorMessage(error.message || '수정에 실패했습니다');
-      setShowErrorAlert(true);
+      showErrorAlert(error.message || '수정에 실패했습니다');
     }
   };
 
@@ -180,18 +128,11 @@ export const ManagementPage: React.FC = () => {
     if (!confirm('정말 삭제하시겠습니까?')) return;
 
     try {
-      if (entityType === 'user') {
-        await userService.delete(id);
-      } else {
-        await postService.delete(id);
-      }
-
+      await ManagementService.deleteEntity(entityType, id);
       await loadData();
-      setAlertMessage('삭제되었습니다');
-      setShowSuccessAlert(true);
+      showSuccessAlert(getSuccessMessage(entityType, 'delete'));
     } catch (error: any) {
-      setErrorMessage(error.message || '삭제에 실패했습니다');
-      setShowErrorAlert(true);
+      showErrorAlert(error.message || '삭제에 실패했습니다');
     }
   };
 
@@ -202,107 +143,15 @@ export const ManagementPage: React.FC = () => {
     if (entityType !== 'post') return;
 
     try {
-      if (action === 'publish') {
-        await postService.publish(id);
-      } else if (action === 'archive') {
-        await postService.archive(id);
-      } else if (action === 'restore') {
-        await postService.restore(id);
-      }
-
+      await ManagementService.changePostStatus(id, action);
       await loadData();
-      const message =
-        action === 'publish' ? '게시' : action === 'archive' ? '보관' : '복원';
-      setAlertMessage(`${message}되었습니다`);
-      setShowSuccessAlert(true);
+      showSuccessAlert(getSuccessMessage(entityType, action));
     } catch (error: any) {
-      setErrorMessage(error.message || '작업에 실패했습니다');
-      setShowErrorAlert(true);
+      showErrorAlert(error.message || '작업에 실패했습니다');
     }
   };
 
-  const getStats = () => {
-    if (entityType === 'user') {
-      const users = data as User[];
-      return {
-        total: users.length,
-        stat1: {
-          label: '활성',
-          value: users.filter((u) => u.status === 'active').length,
-          color: '#2e7d32',
-        },
-        stat2: {
-          label: '비활성',
-          value: users.filter((u) => u.status === 'inactive').length,
-          color: '#ed6c02',
-        },
-        stat3: {
-          label: '정지',
-          value: users.filter((u) => u.status === 'suspended').length,
-          color: '#d32f2f',
-        },
-        stat4: {
-          label: '관리자',
-          value: users.filter((u) => u.role === 'admin').length,
-          color: '#1976d2',
-        },
-      };
-    } else {
-      const posts = data as Post[];
-      return {
-        total: posts.length,
-        stat1: {
-          label: '게시됨',
-          value: posts.filter((p) => p.status === 'published').length,
-          color: '#2e7d32',
-        },
-        stat2: {
-          label: '임시저장',
-          value: posts.filter((p) => p.status === 'draft').length,
-          color: '#ed6c02',
-        },
-        stat3: {
-          label: '보관됨',
-          value: posts.filter((p) => p.status === 'archived').length,
-          color: 'rgba(0, 0, 0, 0.6)',
-        },
-        stat4: {
-          label: '총 조회수',
-          value: posts.reduce((sum, p) => sum + p.views, 0),
-          color: '#1976d2',
-        },
-      };
-    }
-  };
-
-  // 🚨 Table 컴포넌트에 로직을 위임하여 간소화
-  const renderTableColumns = () => {
-    if (entityType === 'user') {
-      return [
-        { key: 'id', header: 'ID', width: '60px' },
-        { key: 'username', header: '사용자명', width: '150px' },
-        { key: 'email', header: '이메일' },
-        { key: 'role', header: '역할', width: '120px' },
-        { key: 'status', header: '상태', width: '120px' },
-        { key: 'createdAt', header: '생성일', width: '120px' },
-        { key: 'lastLogin', header: '마지막 로그인', width: '140px' },
-        { key: 'actions', header: '관리', width: '200px' },
-      ];
-    } else {
-      return [
-        { key: 'id', header: 'ID', width: '60px' },
-        { key: 'title', header: '제목' },
-        { key: 'author', header: '작성자', width: '120px' },
-        { key: 'category', header: '카테고리', width: '140px' },
-        { key: 'status', header: '상태', width: '120px' },
-        { key: 'views', header: '조회수', width: '100px' },
-        { key: 'createdAt', header: '작성일', width: '120px' },
-        { key: 'actions', header: '관리', width: '250px' },
-      ];
-    }
-  };
-
-  const stats = getStats();
+  const stats = getStats(entityType, data);
 
   return (
     <div className="min-h-screen bg-[var(--color-semantic-background-normal-normal)] transition-colors">
@@ -353,26 +202,22 @@ export const ManagementPage: React.FC = () => {
               </Button>
             </div>
 
-            {showSuccessAlert && (
+            {alertState.showSuccess && (
               <div style={{ marginBottom: '10px' }}>
                 <Alert
                   variant="success"
                   title="성공"
-                  onClose={() => setShowSuccessAlert(false)}
+                  onClose={hideSuccessAlert}
                 >
-                  {alertMessage}
+                  {alertState.successMessage}
                 </Alert>
               </div>
             )}
 
-            {showErrorAlert && (
+            {alertState.showError && (
               <div style={{ marginBottom: '10px' }}>
-                <Alert
-                  variant="error"
-                  title="오류"
-                  onClose={() => setShowErrorAlert(false)}
-                >
-                  {errorMessage}
+                <Alert variant="error" title="오류" onClose={hideErrorAlert}>
+                  {alertState.errorMessage}
                 </Alert>
               </div>
             )}
@@ -456,7 +301,7 @@ export const ManagementPage: React.FC = () => {
               style={{ borderColor: 'var(--color-semantic-line-solid-normal)' }}
             >
               <DataTable
-                columns={renderTableColumns()}
+                columns={getTableColumns(entityType)}
                 data={data}
                 striped
                 hover
@@ -477,16 +322,13 @@ export const ManagementPage: React.FC = () => {
         onOpenChange={(open) => {
           setIsCreateModalOpen(open);
           if (!open) {
-            setUserFormData({});
-            setPostFormData({});
+            resetFormData();
           }
         }}
       >
         <DialogContent size="large">
           <DialogHeader>
-            <DialogTitle>
-              새 {entityType === 'user' ? '사용자' : '게시글'} 만들기
-            </DialogTitle>
+            <DialogTitle>새 {getEntityLabel(entityType)} 만들기</DialogTitle>
           </DialogHeader>
           <div>
             {entityType === 'user' ? (
@@ -501,8 +343,7 @@ export const ManagementPage: React.FC = () => {
               size="md"
               onClick={() => {
                 setIsCreateModalOpen(false);
-                setUserFormData({});
-                setPostFormData({});
+                resetFormData();
               }}
             >
               취소
@@ -519,17 +360,14 @@ export const ManagementPage: React.FC = () => {
         onOpenChange={(open) => {
           setIsEditModalOpen(open);
           if (!open) {
-            setUserFormData({});
-            setPostFormData({});
+            resetFormData();
             setSelectedItem(null);
           }
         }}
       >
         <DialogContent size="large">
           <DialogHeader>
-            <DialogTitle>
-              {entityType === 'user' ? '사용자' : '게시글'} 수정
-            </DialogTitle>
+            <DialogTitle>{getEntityLabel(entityType)} 수정</DialogTitle>
           </DialogHeader>
           <div>
             {selectedItem && (
@@ -552,8 +390,7 @@ export const ManagementPage: React.FC = () => {
               size="md"
               onClick={() => {
                 setIsEditModalOpen(false);
-                setUserFormData({});
-                setPostFormData({});
+                resetFormData();
                 setSelectedItem(null);
               }}
             >
