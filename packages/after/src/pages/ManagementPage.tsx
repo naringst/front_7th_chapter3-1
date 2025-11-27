@@ -15,7 +15,10 @@ import {
   DialogFooter,
 } from '@/shared/ui/dialog';
 import { CardBase, CardContent } from '@/shared/ui/card';
-import { UserForm, type UserFormData } from '@/features/user/UserForm';
+import {
+  UserForm,
+  type UserFormData,
+} from '@/features/user/components/UserForm';
 import {
   ArticleForm,
   type ArticleFormData,

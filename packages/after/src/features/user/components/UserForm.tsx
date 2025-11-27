@@ -9,8 +9,8 @@ import {
   FormMessage,
 } from '@/shared/ui/form';
 import { Input } from '@/shared/ui/input';
-import { validateUserName, validateEmail } from './user.service';
-import { FormSelect } from '../../shared/ui/form/FormSelect';
+import { validateUserName, validateEmail } from '../user.service';
+import { FormSelect } from '../../../shared/ui/form/FormSelect';
 
 export interface UserFormData {
   username?: string;
