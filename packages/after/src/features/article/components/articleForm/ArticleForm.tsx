@@ -12,7 +12,7 @@ import { Input } from '@/shared/ui/input';
 
 import { cn } from '@/shared/lib/utils';
 import { validatePostTitle } from '../../article.service';
-import { FormSelect } from '@/features/common/components/form/FormSelect';
+import { FormSelect } from '@/shared/ui/form/FormSelect';
 
 export interface ArticleFormData {
   title?: string;
