@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Alert } from '../components/organisms';
+
 import { DataTable } from '../shared/components';
 import { userService } from '../services/userService';
 import { postService } from '../services/postService';
@@ -20,6 +20,7 @@ import {
   ArticleForm,
   type ArticleFormData,
 } from '@/features/article/components/articleForm/ArticleForm';
+import { Alert } from '@/shared/ui/Alert';
 
 type EntityType = 'user' | 'post';
 type Entity = User | Post;
