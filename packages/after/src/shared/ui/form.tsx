@@ -97,7 +97,10 @@ function FormLabel({
     <Label
       data-slot="form-label"
       data-error={!!error}
-      className={cn('data-[error=true]:text-destructive', className)}
+      className={cn(
+        'data-[error=true]:text-[var(--color-semantic-status-negative)]',
+        className,
+      )}
       htmlFor={formItemId}
       {...props}
     />
@@ -130,7 +133,7 @@ function FormDescription({ className, ...props }: React.ComponentProps<'p'>) {
     <p
       data-slot="form-description"
       id={formDescriptionId}
-      className={cn('text-muted-foreground text-sm', className)}
+      className={cn('text-sm text-[var(--color-semantic-label-assistive)]', className)}
       {...props}
     />
   );
@@ -148,7 +151,7 @@ function FormMessage({ className, ...props }: React.ComponentProps<'p'>) {
     <p
       data-slot="form-message"
       id={formMessageId}
-      className={cn('text-destructive text-sm', className)}
+      className={cn('text-sm text-[var(--color-semantic-status-negative)]', className)}
       {...props}
     >
       {body}

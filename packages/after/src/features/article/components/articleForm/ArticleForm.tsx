@@ -197,12 +197,17 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
                   placeholder="게시글 내용을 입력하세요"
                   rows={6}
                   className={cn(
-                    'flex min-h-[80px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs transition-[color,box-shadow] outline-none',
-                    'placeholder:text-muted-foreground',
-                    'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
+                    'flex min-h-[80px] w-full rounded-md border px-3 py-2 text-sm transition-[color,box-shadow] outline-none resize-y',
+                    'border-[var(--color-semantic-line-solid-normal)]',
+                    'bg-[var(--color-semantic-background-normal-normal)]',
+                    'text-[var(--color-semantic-label-normal)]',
+                    'placeholder:text-[var(--color-semantic-label-assistive)]',
+                    'focus-visible:border-[var(--color-semantic-primary-normal)]',
+                    'focus-visible:ring-[var(--color-semantic-primary-normal)]/50 focus-visible:ring-[3px]',
                     'disabled:cursor-not-allowed disabled:opacity-50',
-                    'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
-                    'resize-y',
+                    'disabled:bg-[var(--color-semantic-interaction-disable)]',
+                    'aria-invalid:border-[var(--color-semantic-status-negative)]',
+                    'aria-invalid:ring-[var(--color-semantic-status-negative)]/20',
                   )}
                 />
               </FormControl>

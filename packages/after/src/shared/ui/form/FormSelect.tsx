@@ -63,11 +63,17 @@ export const FormSelect: React.FC<FormSelectProps> = ({
           disabled={disabled}
           required={required}
           className={cn(
-            'flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-[color,box-shadow] outline-none',
-            'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
+            'flex h-9 w-full rounded-md border px-3 py-1 text-sm transition-[color,box-shadow] outline-none',
+            'border-[var(--color-semantic-line-solid-normal)]',
+            'bg-[var(--color-semantic-background-normal-normal)]',
+            'text-[var(--color-semantic-label-normal)]',
+            'focus-visible:border-[var(--color-semantic-primary-normal)]',
+            'focus-visible:ring-[var(--color-semantic-primary-normal)]/50 focus-visible:ring-[3px]',
             'disabled:cursor-not-allowed disabled:opacity-50',
-            'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
-            error && 'border-destructive',
+            'disabled:bg-[var(--color-semantic-interaction-disable)]',
+            'aria-invalid:border-[var(--color-semantic-status-negative)]',
+            'aria-invalid:ring-[var(--color-semantic-status-negative)]/20',
+            error && 'border-[var(--color-semantic-status-negative)]',
             className,
           )}
         >
