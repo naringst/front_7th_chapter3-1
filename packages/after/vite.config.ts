@@ -7,6 +7,7 @@ import path from 'path';
 // https://vite.dev/config/
 // https://vite.dev/config/
 const viteConfig = defineConfig({
+  base: process.env.NODE_ENV === 'production' ? '/front_7th_chapter3-1/' : '/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
