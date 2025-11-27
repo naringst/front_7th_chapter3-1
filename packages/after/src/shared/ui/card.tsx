@@ -89,6 +89,7 @@ interface CardProps {
   subtitle?: string;
   variant?: 'default' | 'bordered' | 'elevated' | 'flat';
   headerActions?: React.ReactNode;
+  className?: string;
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -97,21 +98,47 @@ export const Card: React.FC<CardProps> = ({
   subtitle,
   variant = 'default',
   headerActions,
+  className,
 }) => {
-  const cardClasses = ['card', `card-${variant}`].join(' ');
+  const variantStyles = {
+    default: cn(
+      'bg-[var(--color-semantic-background-normal-normal)] border-[var(--color-semantic-line-solid-normal)]',
+      'shadow-[var(--style-semantic-shadow-normal)]',
+    ),
+    bordered: 'border-[var(--color-semantic-line-solid-normal)]',
+    elevated: cn(
+      'bg-[var(--color-semantic-background-elevated-normal)] border-[var(--color-semantic-line-normal-normal)]',
+      'shadow-[var(--style-semantic-shadow-emphasize)]',
+    ),
+    flat: 'bg-[var(--color-semantic-background-normal-alternative)] border-[var(--color-semantic-line-normal-alternative)]',
+  };
 
   return (
-    <div className={cardClasses}>
+    <div
+      className={cn(
+        'rounded-lg border overflow-hidden',
+        variantStyles[variant],
+        className,
+      )}
+    >
       {(title || subtitle || headerActions) && (
-        <div className="card-header">
+        <div className="px-5 py-4 border-b border-[var(--color-semantic-line-solid-normal)] bg-[var(--color-semantic-background-normal-alternative)] flex justify-between items-center">
           <div>
-            {title && <h3 className="card-title">{title}</h3>}
-            {subtitle && <p className="card-subtitle">{subtitle}</p>}
+            {title && (
+              <h3 className="text-lg font-medium text-[var(--color-semantic-label-normal)] leading-tight m-0">
+                {title}
+              </h3>
+            )}
+            {subtitle && (
+              <p className="text-sm text-[var(--color-semantic-label-assistive)] leading-relaxed mt-1 mb-0">
+                {subtitle}
+              </p>
+            )}
           </div>
           {headerActions && <div>{headerActions}</div>}
         </div>
       )}
-      <div className="card-body">{children}</div>
+      <div className="px-5 py-4">{children}</div>
     </div>
   );
 };

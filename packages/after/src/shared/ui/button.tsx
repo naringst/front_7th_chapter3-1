@@ -5,24 +5,29 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/shared/lib/utils';
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-[3px]",
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        default:
+          'bg-[var(--color-semantic-primary-normal)] text-[var(--color-semantic-static-white)] hover:bg-[var(--color-semantic-primary-strong)] focus-visible:ring-[var(--color-semantic-primary-normal)]/50',
+        primary:
+          'bg-[var(--color-semantic-primary-normal)] text-[var(--color-semantic-static-white)] hover:bg-[var(--color-semantic-primary-strong)] focus-visible:ring-[var(--color-semantic-primary-normal)]/50',
         destructive:
-          'bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
+          'bg-[var(--color-semantic-status-negative)] text-[var(--color-semantic-static-white)] hover:bg-[var(--color-atomic-red-40)] focus-visible:ring-[var(--color-semantic-status-negative)]/50',
         outline:
-          'border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50',
+          'border border-[var(--color-semantic-line-solid-normal)] bg-[var(--color-semantic-background-normal-normal)] text-[var(--color-semantic-label-normal)] hover:bg-[var(--color-component-fill-normal)] hover:text-[var(--color-semantic-label-strong)] focus-visible:ring-[var(--color-semantic-primary-normal)]/50',
         secondary:
-          'bg-secondary text-black border border-[#333333] hover:bg-secondary/80',
+          'bg-[var(--color-semantic-background-normal-alternative)] text-[var(--color-semantic-label-normal)] border border-[var(--color-semantic-line-solid-normal)] hover:bg-[var(--color-component-fill-strong)]',
         ghost:
-          'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
-        link: 'text-primary underline-offset-4 hover:underline',
-        // 새로 추가
-        primary: 'bg-primary text-white',
-        success: 'bg-success text-white',
-        danger: 'bg-danger text-white',
+          'text-[var(--color-semantic-label-normal)] hover:bg-[var(--color-component-fill-normal)] hover:text-[var(--color-semantic-label-strong)]',
+        link: 'text-[var(--color-semantic-primary-normal)] underline-offset-4 hover:underline',
+        success:
+          'bg-[var(--color-semantic-status-positive)] text-[var(--color-semantic-static-white)] hover:bg-[var(--color-atomic-green-40)] focus-visible:ring-[var(--color-semantic-status-positive)]/50',
+        danger:
+          'bg-[var(--color-semantic-status-negative)] text-[var(--color-semantic-static-white)] hover:bg-[var(--color-atomic-red-40)] focus-visible:ring-[var(--color-semantic-status-negative)]/50',
+        warning:
+          'bg-[var(--color-semantic-status-cautionary)] text-[var(--color-semantic-static-white)] hover:bg-[var(--color-atomic-orange-40)] focus-visible:ring-[var(--color-semantic-status-cautionary)]/50',
       },
       size: {
         default: 'h-9 px-4 py-2 has-[>svg]:px-3',
