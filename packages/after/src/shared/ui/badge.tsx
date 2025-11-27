@@ -4,27 +4,24 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/shared/lib/utils';
 
 const badgeVariants = cva(
-  'inline-flex items-center rounded-md border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2',
+  'inline-flex items-center rounded-md border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
   {
     variants: {
       variant: {
         default:
-          'border-transparent bg-[var(--color-semantic-primary-normal)] text-[var(--color-semantic-static-white)]',
-        primary:
-          'border-transparent bg-[var(--color-semantic-primary-normal)] text-[var(--color-semantic-static-white)]',
+          'border-transparent bg-primary text-primary-foreground hover:bg-primary/80',
         secondary:
-          'border-transparent bg-[var(--color-atomic-coolNeutral-50)] text-[var(--color-semantic-static-white)]',
+          'border-transparent bg-[#757575] text-white hover:bg-[#757575]/80' /* Badge 전용 secondary 색상 */,
         destructive:
-          'border-transparent bg-[var(--color-semantic-status-negative)] text-[var(--color-semantic-static-white)]',
-        outline:
-          'border-[var(--color-semantic-line-solid-normal)] bg-transparent text-[var(--color-semantic-label-normal)]',
-        success:
-          'border-transparent bg-[var(--color-semantic-status-positive)] text-[var(--color-semantic-static-white)]',
-        warning:
-          'border-transparent bg-[var(--color-semantic-status-cautionary)] text-[var(--color-semantic-static-white)]',
-        danger:
-          'border-transparent bg-[var(--color-semantic-status-negative)] text-[var(--color-semantic-static-white)]',
-        info: 'border-transparent bg-[var(--color-atomic-lightBlue-50)] text-[var(--color-semantic-static-white)]',
+          'border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80',
+        outline: 'text-foreground',
+        success: 'border-transparent bg-success text-white hover:bg-success/80',
+        warning: 'border-transparent bg-warning text-white hover:bg-warning/80',
+        danger: 'border-transparent bg-danger text-white hover:bg-danger/80',
+        info: 'border-transparent bg-info text-white hover:bg-info/80',
+        // 기존 Badge의 type prop과 호환을 위한 별칭
+        primary:
+          'border-transparent bg-primary text-primary-foreground hover:bg-primary/80',
       },
       size: {
         default: 'px-2 py-0.5 text-xs',
