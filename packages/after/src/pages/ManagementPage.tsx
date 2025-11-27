@@ -10,7 +10,7 @@ import { UserForm, type UserFormData } from '@/features/user/UserForm';
 import {
   ArticleForm,
   type ArticleFormData,
-} from '@/features/article/ArticleForm';
+} from '@/features/article/components/articleForm/ArticleForm';
 
 type EntityType = 'user' | 'post';
 type Entity = User | Post;

@@ -34,17 +34,17 @@ export const getArticleTypeFromStatus = (
 export const validatePostTitle = (
   title: string,
   checkBusinessRules: boolean = false,
-) => {
+): string | null => {
   if (!title) {
-    throw new Error('제목을 입력해주세요');
+    return null; // 빈 값은 검증하지 않음 (required는 별도 처리)
   }
 
   if (title.length < 5) {
-    throw new Error('제목은 5자 이상이어야 합니다');
+    return '제목은 5자 이상이어야 합니다';
   }
 
   if (title.length > 100) {
-    throw new Error('제목은 100자 이하여야 합니다');
+    return '제목은 100자 이하여야 합니다';
   }
 
   // 비즈니스 규칙: 금칙어 체크
@@ -52,9 +52,9 @@ export const validatePostTitle = (
     const bannedWords = ['광고', '스팸', '홍보'];
     const hasBannedWord = bannedWords.some((word) => title.includes(word));
     if (hasBannedWord) {
-      throw new Error('제목에 금지된 단어가 포함되어 있습니다');
+      return '제목에 금지된 단어가 포함되어 있습니다';
     }
   }
 
-  return true;
+  return null; // 검증 통과
 };
