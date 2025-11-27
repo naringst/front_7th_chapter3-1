@@ -23,6 +23,397 @@
   --color-border: #e5e5e5;
   --color-input: #e5e5e5;
   --color-ring: #1976d2;
+
+  /* Design System Color Tokens */
+  /* Common */
+  --color-atomic-common-100: #ffffff;
+  --color-atomic-common-0: #000000;
+  --color-global-neutral-100: #ffffff;
+  --color-global-neutral-0: #000000;
+
+  /* Neutral */
+  --color-atomic-neutral-99: #f7f7f7;
+  --color-atomic-neutral-95: #dcdcdc;
+  --color-atomic-neutral-90: #c4c4c4;
+  --color-atomic-neutral-80: #b0b0b0;
+  --color-atomic-neutral-70: #9b9b9b;
+  --color-atomic-neutral-60: #8a8a8a;
+  --color-atomic-neutral-50: #737373;
+  --color-atomic-neutral-40: #5c5c5c;
+  --color-atomic-neutral-30: #474747;
+  --color-atomic-neutral-22: #303030;
+  --color-atomic-neutral-20: #2a2a2a;
+  --color-atomic-neutral-15: #1c1c1c;
+  --color-atomic-neutral-10: #171717;
+  --color-atomic-neutral-5: #0f0f0f;
+
+  /* Cool Neutral */
+  --color-global-coolNeutral-100: #ffffff;
+  --color-atomic-coolNeutral-99: #f7f7f8;
+  --color-atomic-coolNeutral-98: #f4f4f5;
+  --color-atomic-coolNeutral-97: #eaebec;
+  --color-atomic-coolNeutral-96: #e1e2e4;
+  --color-atomic-coolNeutral-95: #dbdcdf;
+  --color-atomic-coolNeutral-90: #c2c4c8;
+  --color-atomic-coolNeutral-80: #aeb0b6;
+  --color-atomic-coolNeutral-70: #989ba2;
+  --color-atomic-coolNeutral-60: #878a93;
+  --color-atomic-coolNeutral-50: #70737c;
+  --color-atomic-coolNeutral-40: #5a5c63;
+  --color-atomic-coolNeutral-30: #46474c;
+  --color-atomic-coolNeutral-25: #37383c;
+  --color-atomic-coolNeutral-23: #333438;
+  --color-atomic-coolNeutral-22: #2e2f33;
+  --color-atomic-coolNeutral-20: #292a2d;
+  --color-atomic-coolNeutral-17: #212225;
+  --color-atomic-coolNeutral-15: #1b1c1e;
+  --color-atomic-coolNeutral-10: #171719;
+  --color-atomic-coolNeutral-7: #141415;
+  --color-atomic-coolNeutral-5: #0f0f10;
+  --color-global-coolNeutral-0: #000000;
+
+  /* Blue */
+  --color-global-blue-100: #ffffff;
+  --color-atomic-blue-99: #f7fbff;
+  --color-atomic-blue-95: #eaf2fe;
+  --color-atomic-blue-90: #c9defe;
+  --color-atomic-blue-80: #9ec5ff;
+  --color-atomic-blue-70: #69a5ff;
+  --color-atomic-blue-65: #4f95ff;
+  --color-atomic-blue-60: #3385ff;
+  --color-atomic-blue-55: #1a75ff;
+  --color-atomic-blue-50: #0066ff;
+  --color-atomic-blue-45: #005eeb;
+  --color-atomic-blue-40: #0054d1;
+  --color-atomic-blue-30: #003e9c;
+  --color-atomic-blue-20: #002966;
+  --color-atomic-blue-10: #001536;
+  --color-global-blue-0: #000000;
+
+  /* Red */
+  --color-global-red-100: #ffffff;
+  --color-atomic-red-99: #fffafa;
+  --color-atomic-red-95: #feecec;
+  --color-atomic-red-90: #fed5d5;
+  --color-atomic-red-80: #ffb5b5;
+  --color-atomic-red-70: #ff8c8c;
+  --color-atomic-red-60: #ff6363;
+  --color-atomic-red-50: #ff4242;
+  --color-atomic-red-40: #e52222;
+  --color-atomic-red-30: #b20c0c;
+  --color-atomic-red-20: #750404;
+  --color-atomic-red-10: #3b0101;
+  --color-global-red-0: #000000;
+
+  /* Green */
+  --color-global-green-100: #ffffff;
+  --color-atomic-green-99: #f2fff6;
+  --color-atomic-green-95: #d9ffe6;
+  --color-atomic-green-90: #acfcc7;
+  --color-atomic-green-80: #7df5a5;
+  --color-atomic-green-70: #49e57d;
+  --color-atomic-green-60: #1ed45a;
+  --color-atomic-green-50: #00bf40;
+  --color-atomic-green-40: #009632;
+  --color-atomic-green-30: #006e25;
+  --color-atomic-green-20: #004517;
+  --color-atomic-green-10: #00240c;
+  --color-global-green-0: #000000;
+
+  /* Orange */
+  --color-global-orange-100: #ffffff;
+  --color-atomic-orange-99: #fffcf7;
+  --color-atomic-orange-95: #fef4e6;
+  --color-atomic-orange-90: #fee6c6;
+  --color-atomic-orange-80: #ffd49c;
+  --color-atomic-orange-70: #ffc06e;
+  --color-atomic-orange-60: #ffa938;
+  --color-atomic-orange-50: #ff9200;
+  --color-atomic-orange-40: #d47800;
+  --color-atomic-orange-39: #d17600;
+  --color-atomic-orange-30: #9c5800;
+  --color-atomic-orange-20: #663a00;
+  --color-atomic-orange-10: #361e00;
+  --color-global-orange-0: #000000;
+
+  /* Red Orange */
+  --color-global-redOrange-100: #ffffff;
+  --color-atomic-redOrange-99: #fffaf7;
+  --color-atomic-redOrange-95: #feeee5;
+  --color-atomic-redOrange-90: #fedbc6;
+  --color-atomic-redOrange-80: #ffc09c;
+  --color-atomic-redOrange-70: #ff9c63;
+  --color-atomic-redOrange-60: #ff7b2e;
+  --color-atomic-redOrange-50: #ff5e00;
+  --color-atomic-redOrange-48: #f55a00;
+  --color-atomic-redOrange-40: #cc4b00;
+  --color-atomic-redOrange-30: #943600;
+  --color-atomic-redOrange-20: #5c2200;
+  --color-atomic-redOrange-10: #2e1100;
+  --color-global-redOrange-0: #000000;
+
+  /* Lime */
+  --color-global-lime-100: #ffffff;
+  --color-atomic-lime-99: #f8fff2;
+  --color-atomic-lime-95: #e6ffd4;
+  --color-atomic-lime-90: #ccfca9;
+  --color-atomic-lime-80: #aef779;
+  --color-atomic-lime-70: #88f03e;
+  --color-atomic-lime-60: #6be016;
+  --color-atomic-lime-50: #58cf04;
+  --color-atomic-lime-40: #48ad00;
+  --color-atomic-lime-37: #429e00;
+  --color-atomic-lime-30: #347d00;
+  --color-atomic-lime-20: #225200;
+  --color-atomic-lime-10: #112900;
+  --color-global-lime-0: #000000;
+
+  /* Cyan */
+  --color-global-cyan-100: #ffffff;
+  --color-atomic-cyan-99: #f7feff;
+  --color-atomic-cyan-95: #defaff;
+  --color-atomic-cyan-90: #b5f4ff;
+  --color-atomic-cyan-80: #8aedff;
+  --color-atomic-cyan-70: #57dff7;
+  --color-atomic-cyan-60: #28d0ed;
+  --color-atomic-cyan-50: #00bdde;
+  --color-atomic-cyan-40: #0098b2;
+  --color-atomic-cyan-30: #006f82;
+  --color-atomic-cyan-20: #004854;
+  --color-atomic-cyan-10: #00252b;
+  --color-global-cyan-0: #000000;
+
+  /* Light Blue */
+  --color-global-lightBlue-100: #ffffff;
+  --color-atomic-lightBlue-99: #f7fdff;
+  --color-atomic-lightBlue-95: #e5f6fe;
+  --color-atomic-lightBlue-90: #c4ecfe;
+  --color-atomic-lightBlue-80: #a1e1ff;
+  --color-atomic-lightBlue-70: #70d2ff;
+  --color-atomic-lightBlue-60: #3dc2ff;
+  --color-atomic-lightBlue-50: #00aeff;
+  --color-atomic-lightBlue-40: #008dcf;
+  --color-atomic-lightBlue-30: #006796;
+  --color-atomic-lightBlue-20: #004261;
+  --color-atomic-lightBlue-10: #002130;
+  --color-global-lightBlue-0: #000000;
+
+  /* Violet */
+  --color-global-violet-100: #ffffff;
+  --color-atomic-violet-99: #fbfaff;
+  --color-atomic-violet-95: #f0ecfe;
+  --color-atomic-violet-90: #dbd3fe;
+  --color-atomic-violet-80: #c0b0ff;
+  --color-atomic-violet-70: #9e86fc;
+  --color-atomic-violet-60: #7d5ef7;
+  --color-atomic-violet-50: #6541f2;
+  --color-atomic-violet-45: #5b37ed;
+  --color-atomic-violet-40: #4f29e5;
+  --color-atomic-violet-30: #3a16c9;
+  --color-atomic-violet-20: #23098f;
+  --color-atomic-violet-10: #11024d;
+  --color-global-violet-0: #000000;
+
+  /* Purple */
+  --color-global-purple-100: #ffffff;
+  --color-atomic-purple-99: #fefbff;
+  --color-atomic-purple-95: #f9edff;
+  --color-atomic-purple-90: #f2d6ff;
+  --color-atomic-purple-80: #e9baff;
+  --color-atomic-purple-70: #de96ff;
+  --color-atomic-purple-60: #d478ff;
+  --color-atomic-purple-50: #cb59ff;
+  --color-atomic-purple-40: #ad36e3;
+  --color-atomic-purple-30: #861cb8;
+  --color-atomic-purple-20: #580a7d;
+  --color-atomic-purple-10: #290247;
+  --color-global-purple-0: #000000;
+
+  /* Pink */
+  --color-global-pink-100: #ffffff;
+  --color-atomic-pink-99: #fffafe;
+  --color-atomic-pink-95: #feecfb;
+  --color-atomic-pink-90: #fed3f7;
+  --color-atomic-pink-80: #ffb8f3;
+  --color-atomic-pink-70: #ff94ed;
+  --color-atomic-pink-60: #fa73e3;
+  --color-atomic-pink-50: #f553da;
+  --color-atomic-pink-46: #e846cd;
+  --color-atomic-pink-40: #d331b8;
+  --color-atomic-pink-30: #a81690;
+  --color-atomic-pink-20: #730560;
+  --color-atomic-pink-10: #3d0133;
+  --color-global-pink-0: #000000;
+
+  /* Opacity */
+  --color-atomic-opacity-0: 0;
+  --color-atomic-opacity-5: 0.05;
+  --color-atomic-opacity-8: 0.08;
+  --color-atomic-opacity-12: 0.12;
+  --color-atomic-opacity-16: 0.16;
+  --color-atomic-opacity-22: 0.22;
+  --color-atomic-opacity-28: 0.28;
+  --color-atomic-opacity-35: 0.35;
+  --color-atomic-opacity-43: 0.43;
+  --color-atomic-opacity-52: 0.52;
+  --color-atomic-opacity-61: 0.61;
+  --color-atomic-opacity-74: 0.74;
+  --color-atomic-opacity-88: 0.88;
+  --color-atomic-opacity-97: 0.97;
+  --color-atomic-opacity-100: 1;
+
+  /* Semantic Color Tokens */
+  /* Static */
+  --color-semantic-static-white: var(--color-atomic-common-100);
+  --color-semantic-static-black: var(--color-atomic-common-0);
+
+  /* Primary */
+  --color-semantic-primary-normal: var(--color-atomic-blue-50);
+  --color-semantic-primary-strong: var(--color-atomic-blue-45);
+  --color-semantic-primary-heavy: var(--color-atomic-blue-40);
+
+  /* Label */
+  --color-semantic-label-normal: var(--color-atomic-coolNeutral-10);
+  --color-semantic-label-strong: var(--color-atomic-common-0);
+  --color-semantic-label-neutral: rgba(
+    46,
+    47,
+    51,
+    0.88
+  ); /* coolNeutral-22 with opacity-88 */
+  --color-semantic-label-alternative: rgba(
+    55,
+    56,
+    60,
+    0.61
+  ); /* coolNeutral-25 with opacity-61 */
+  --color-semantic-label-assistive: rgba(
+    55,
+    56,
+    60,
+    0.28
+  ); /* coolNeutral-25 with opacity-28 */
+  --color-semantic-label-disable: rgba(
+    55,
+    56,
+    60,
+    0.16
+  ); /* coolNeutral-25 with opacity-16 */
+
+  /* Background */
+  --color-semantic-background-normal-normal: var(--color-atomic-common-100);
+  --color-semantic-background-normal-alternative: var(
+    --color-atomic-coolNeutral-99
+  );
+  --color-semantic-background-elevated-normal: var(--color-atomic-common-100);
+  --color-semantic-background-elevated-alternative: var(
+    --color-atomic-coolNeutral-99
+  );
+
+  /* Interaction */
+  --color-semantic-interaction-inactive: var(--color-atomic-coolNeutral-70);
+  --color-semantic-interaction-disable: var(--color-atomic-coolNeutral-98);
+
+  /* Line */
+  --color-semantic-line-normal-normal: rgba(
+    112,
+    115,
+    124,
+    0.22
+  ); /* coolNeutral-50 with opacity-22 */
+  --color-semantic-line-normal-neutral: rgba(
+    112,
+    115,
+    124,
+    0.16
+  ); /* coolNeutral-50 with opacity-16 */
+  --color-semantic-line-normal-alternative: rgba(
+    112,
+    115,
+    124,
+    0.08
+  ); /* coolNeutral-50 with opacity-8 */
+  --color-semantic-line-solid-normal: var(--color-atomic-coolNeutral-96);
+  --color-semantic-line-solid-neutral: var(--color-atomic-coolNeutral-97);
+  --color-semantic-line-solid-alternative: var(--color-atomic-coolNeutral-98);
+
+  /* Status */
+  --color-semantic-status-positive: var(--color-atomic-green-50);
+  --color-semantic-status-cautionary: var(--color-atomic-orange-50);
+  --color-semantic-status-negative: var(--color-atomic-red-50);
+
+  /* Accent Background */
+  --color-semantic-accent-background-redOrange: var(
+    --color-atomic-redOrange-50
+  );
+  --color-semantic-accent-background-lime: var(--color-atomic-lime-50);
+  --color-semantic-accent-background-cyan: var(--color-atomic-cyan-50);
+  --color-semantic-accent-background-lightBlue: var(
+    --color-atomic-lightBlue-50
+  );
+  --color-semantic-accent-background-violet: var(--color-atomic-violet-50);
+  --color-semantic-accent-background-purple: var(--color-atomic-purple-50);
+  --color-semantic-accent-background-pink: var(--color-atomic-pink-50);
+
+  /* Accent Foreground */
+  --color-semantic-accent-foreground-red: var(--color-atomic-red-40);
+  --color-semantic-accent-foreground-redOrange: var(
+    --color-atomic-redOrange-48
+  );
+  --color-semantic-accent-foreground-orange: var(--color-atomic-orange-39);
+  --color-semantic-accent-foreground-lime: var(--color-atomic-lime-37);
+  --color-semantic-accent-foreground-green: var(--color-atomic-green-40);
+  --color-semantic-accent-foreground-cyan: var(--color-atomic-cyan-40);
+  --color-semantic-accent-foreground-lightBlue: var(
+    --color-atomic-lightBlue-40
+  );
+  --color-semantic-accent-foreground-blue: var(--color-atomic-blue-45);
+  --color-semantic-accent-foreground-violet: var(--color-atomic-violet-45);
+  --color-semantic-accent-foreground-purple: var(--color-atomic-purple-40);
+  --color-semantic-accent-foreground-pink: var(--color-atomic-pink-46);
+
+  /* Inverse */
+  --color-semantic-inverse-primary: var(--color-atomic-blue-60);
+  --color-semantic-inverse-background: var(--color-atomic-coolNeutral-15);
+  --color-semantic-inverse-label: var(--color-atomic-coolNeutral-99);
+
+  /* Component Fill */
+  --color-component-fill-normal: rgba(
+    112,
+    115,
+    124,
+    0.08
+  ); /* coolNeutral-50 with opacity-8 */
+  --color-component-fill-strong: rgba(
+    112,
+    115,
+    124,
+    0.16
+  ); /* coolNeutral-50 with opacity-16 */
+  --color-component-fill-alternative: rgba(
+    112,
+    115,
+    124,
+    0.05
+  ); /* coolNeutral-50 with opacity-5 */
+
+  /* Component Material */
+  --color-component-material-dimmer: rgba(
+    23,
+    23,
+    25,
+    0.52
+  ); /* coolNeutral-10 with opacity-52 */
+
+  /* Elevation/Shadow Tokens */
+  --style-semantic-shadow-normal: 0px 1px 2px rgba(0, 0, 0, 0.12),
+    0px 0px 1px rgba(0, 0, 0, 0.08), 0px 0px 1px rgba(0, 0, 0, 0.08);
+  --style-semantic-shadow-emphasize: 0px 2px 8px rgba(0, 0, 0, 0.12),
+    0px 1px 4px rgba(0, 0, 0, 0.08), 0px 0px 1px rgba(0, 0, 0, 0.08);
+  --style-semantic-shadow-strong: 0px 6px 12px rgba(0, 0, 0, 0.12),
+    0px 4px 8px rgba(0, 0, 0, 0.08), 0px 0px 4px rgba(0, 0, 0, 0.08);
+  --style-semantic-shadow-heavy: 0px 16px 20px rgba(0, 0, 0, 0.12),
+    0px 8px 16px rgba(0, 0, 0, 0.08), 0px 0px 8px rgba(0, 0, 0, 0.08);
 }
 
 /* 기본 리셋 - Badge 같은 컴포넌트의 패딩은 유지 */
