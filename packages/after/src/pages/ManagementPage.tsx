@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, Table, Modal } from '../components/organisms';
+import { Alert, Table } from '../components/organisms';
 import { userService } from '../services/userService';
 import { postService } from '../services/postService';
 import type { User } from '../services/userService';
 import type { Post } from '../services/postService';
 import '../styles/components.css';
 import { Button } from '@/shared/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/shared/ui/dialog';
 import { UserForm, type UserFormData } from '@/features/user/UserForm';
 import {
   ArticleForm,
@@ -566,19 +573,30 @@ export const ManagementPage: React.FC = () => {
         </div>
       </div>
 
-      <Modal
-        isOpen={isCreateModalOpen}
-        onClose={() => {
-          setIsCreateModalOpen(false);
-          setUserFormData({});
-          setPostFormData({});
+      <Dialog
+        open={isCreateModalOpen}
+        onOpenChange={(open) => {
+          setIsCreateModalOpen(open);
+          if (!open) {
+            setUserFormData({});
+            setPostFormData({});
+          }
         }}
-        title={`새 ${entityType === 'user' ? '사용자' : '게시글'} 만들기`}
-        size="large"
-        showFooter
-        footerContent={
-          <>
-            {/* check */}
+      >
+        <DialogContent size="large">
+          <DialogHeader>
+            <DialogTitle>
+              새 {entityType === 'user' ? '사용자' : '게시글'} 만들기
+            </DialogTitle>
+          </DialogHeader>
+          <div>
+            {entityType === 'user' ? (
+              <UserForm value={userFormData} onChange={setUserFormData} />
+            ) : (
+              <ArticleForm value={postFormData} onChange={setPostFormData} />
+            )}
+          </div>
+          <DialogFooter>
             <Button
               variant="secondary"
               size="md"
@@ -590,36 +608,46 @@ export const ManagementPage: React.FC = () => {
             >
               취소
             </Button>
-            {/* check */}
             <Button variant="primary" size="md" onClick={handleCreate}>
               생성
             </Button>
-          </>
-        }
-      >
-        <div>
-          {entityType === 'user' ? (
-            <UserForm value={userFormData} onChange={setUserFormData} />
-          ) : (
-            <ArticleForm value={postFormData} onChange={setPostFormData} />
-          )}
-        </div>
-      </Modal>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
-      <Modal
-        isOpen={isEditModalOpen}
-        onClose={() => {
-          setIsEditModalOpen(false);
-          setUserFormData({});
-          setPostFormData({});
-          setSelectedItem(null);
+      <Dialog
+        open={isEditModalOpen}
+        onOpenChange={(open) => {
+          setIsEditModalOpen(open);
+          if (!open) {
+            setUserFormData({});
+            setPostFormData({});
+            setSelectedItem(null);
+          }
         }}
-        title={`${entityType === 'user' ? '사용자' : '게시글'} 수정`}
-        size="large"
-        showFooter
-        footerContent={
-          <>
-            {/* check */}
+      >
+        <DialogContent size="large">
+          <DialogHeader>
+            <DialogTitle>
+              {entityType === 'user' ? '사용자' : '게시글'} 수정
+            </DialogTitle>
+          </DialogHeader>
+          <div>
+            {selectedItem && (
+              <Alert variant="info">
+                ID: {selectedItem.id} | 생성일: {selectedItem.createdAt}
+                {entityType === 'post' &&
+                  ` | 조회수: ${(selectedItem as Post).views}`}
+              </Alert>
+            )}
+
+            {entityType === 'user' ? (
+              <UserForm value={userFormData} onChange={setUserFormData} />
+            ) : (
+              <ArticleForm value={postFormData} onChange={setPostFormData} />
+            )}
+          </div>
+          <DialogFooter>
             <Button
               variant="secondary"
               size="md"
@@ -632,29 +660,12 @@ export const ManagementPage: React.FC = () => {
             >
               취소
             </Button>
-            {/* check */}
             <Button variant="primary" size="md" onClick={handleUpdate}>
               수정 완료
             </Button>
-          </>
-        }
-      >
-        <div>
-          {selectedItem && (
-            <Alert variant="info">
-              ID: {selectedItem.id} | 생성일: {selectedItem.createdAt}
-              {entityType === 'post' &&
-                ` | 조회수: ${(selectedItem as Post).views}`}
-            </Alert>
-          )}
-
-          {entityType === 'user' ? (
-            <UserForm value={userFormData} onChange={setUserFormData} />
-          ) : (
-            <ArticleForm value={postFormData} onChange={setPostFormData} />
-          )}
-        </div>
-      </Modal>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
