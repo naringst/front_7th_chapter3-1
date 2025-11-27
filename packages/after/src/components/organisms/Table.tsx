@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Badge } from '../atoms/Badge';
 import { Button } from '../ui/button';
+import { getTypeByUserRole } from '@/features/user/user.service';
+import { UserRoleValueLabelMap, type UserRoleType } from '@/features/user/type';
+import { getArticleTypeFromStatus } from '@/features/article/article.service';
+import {
+  articleStatusValueMap,
+  type ArticleStatusType,
+} from '@/features/article/enum';
 
 interface Column {
   key: string;
@@ -123,7 +130,11 @@ export const Table: React.FC<TableProps> = ({
     // 도메인별 특수 렌더링
     if (entityType === 'user') {
       if (columnKey === 'role') {
-        return <Badge userRole={value} showIcon />;
+        return (
+          <Badge type={getTypeByUserRole(value as UserRoleType)} showIcon>
+            {UserRoleValueLabelMap[value as UserRoleType]}
+          </Badge>
+        );
       }
       if (columnKey === 'status') {
         // User status를 Badge status로 변환
@@ -133,7 +144,11 @@ export const Table: React.FC<TableProps> = ({
             : value === 'inactive'
             ? 'draft'
             : 'rejected';
-        return <Badge status={badgeStatus} showIcon />;
+        return (
+          <Badge type={getArticleTypeFromStatus(badgeStatus)} showIcon>
+            {articleStatusValueMap[value as ArticleStatusType]}
+          </Badge>
+        );
       }
       if (columnKey === 'lastLogin') {
         return value || '-';
@@ -173,7 +188,11 @@ export const Table: React.FC<TableProps> = ({
         );
       }
       if (columnKey === 'status') {
-        return <Badge status={value} showIcon />;
+        return (
+          <Badge type={getArticleTypeFromStatus(value)} showIcon>
+            {articleStatusValueMap[value as ArticleStatusType]}
+          </Badge>
+        );
       }
       if (columnKey === 'views') {
         return value?.toLocaleString() || '0';
