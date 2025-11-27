@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import { cn } from '@/shared/lib/utils';
 
-function Card({ className, ...props }: React.ComponentProps<'div'>) {
+// New Card component (Tailwind-based, composable)
+function CardBase({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="card"
@@ -81,8 +82,42 @@ function CardFooter({ className, ...props }: React.ComponentProps<'div'>) {
   );
 }
 
+// Legacy Card component with title, subtitle, variant, headerActions props
+interface CardProps {
+  children?: React.ReactNode;
+  title?: string;
+  subtitle?: string;
+  variant?: 'default' | 'bordered' | 'elevated' | 'flat';
+  headerActions?: React.ReactNode;
+}
+
+export const Card: React.FC<CardProps> = ({
+  children,
+  title,
+  subtitle,
+  variant = 'default',
+  headerActions,
+}) => {
+  const cardClasses = ['card', `card-${variant}`].join(' ');
+
+  return (
+    <div className={cardClasses}>
+      {(title || subtitle || headerActions) && (
+        <div className="card-header">
+          <div>
+            {title && <h3 className="card-title">{title}</h3>}
+            {subtitle && <p className="card-subtitle">{subtitle}</p>}
+          </div>
+          {headerActions && <div>{headerActions}</div>}
+        </div>
+      )}
+      <div className="card-body">{children}</div>
+    </div>
+  );
+};
+
 export {
-  Card,
+  CardBase,
   CardHeader,
   CardFooter,
   CardTitle,
