@@ -7,3 +7,4 @@
 export * from './colors';
 export * from './semantic';
 export * from './elevation';
+export * from './typography';

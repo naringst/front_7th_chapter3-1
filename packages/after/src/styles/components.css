@@ -414,6 +414,75 @@
     0px 4px 8px rgba(0, 0, 0, 0.08), 0px 0px 4px rgba(0, 0, 0, 0.08);
   --style-semantic-shadow-heavy: 0px 16px 20px rgba(0, 0, 0, 0.12),
     0px 8px 16px rgba(0, 0, 0, 0.08), 0px 0px 8px rgba(0, 0, 0, 0.08);
+
+  /* Typography Tokens */
+  /* Display */
+  --typography-display-1-font-size: 56px;
+  --typography-display-1-line-height: 72px;
+  --typography-display-1-letter-spacing: -0.0319em;
+  --typography-display-2-font-size: 40px;
+  --typography-display-2-line-height: 52px;
+  --typography-display-2-letter-spacing: -0.0282em;
+
+  /* Title */
+  --typography-title-1-font-size: 36px;
+  --typography-title-1-line-height: 48px;
+  --typography-title-1-letter-spacing: -0.027em;
+  --typography-title-2-font-size: 28px;
+  --typography-title-2-line-height: 38px;
+  --typography-title-2-letter-spacing: -0.0236em;
+  --typography-title-3-font-size: 24px;
+  --typography-title-3-line-height: 32px;
+  --typography-title-3-letter-spacing: -0.023em;
+
+  /* Heading */
+  --typography-heading-1-font-size: 22px;
+  --typography-heading-1-line-height: 30px;
+  --typography-heading-1-letter-spacing: -0.0194em;
+  --typography-heading-2-font-size: 20px;
+  --typography-heading-2-line-height: 28px;
+  --typography-heading-2-letter-spacing: -0.012em;
+
+  /* Headline */
+  --typography-headline-1-font-size: 18px;
+  --typography-headline-1-line-height: 26px;
+  --typography-headline-1-letter-spacing: -0.002em;
+  --typography-headline-2-font-size: 17px;
+  --typography-headline-2-line-height: 24px;
+  --typography-headline-2-letter-spacing: 0em;
+
+  /* Body */
+  --typography-body-1-normal-font-size: 16px;
+  --typography-body-1-normal-line-height: 24px;
+  --typography-body-1-normal-letter-spacing: 0.0057em;
+  --typography-body-1-reading-font-size: 16px;
+  --typography-body-1-reading-line-height: 26px;
+  --typography-body-1-reading-letter-spacing: 0.0057em;
+  --typography-body-2-normal-font-size: 15px;
+  --typography-body-2-normal-line-height: 22px;
+  --typography-body-2-normal-letter-spacing: 0.0096em;
+  --typography-body-2-reading-font-size: 15px;
+  --typography-body-2-reading-line-height: 24px;
+  --typography-body-2-reading-letter-spacing: 0.0096em;
+
+  /* Label */
+  --typography-label-1-normal-font-size: 14px;
+  --typography-label-1-normal-line-height: 20px;
+  --typography-label-1-normal-letter-spacing: 0.0145em;
+  --typography-label-1-reading-font-size: 14px;
+  --typography-label-1-reading-line-height: 22px;
+  --typography-label-1-reading-letter-spacing: 0.0145em;
+  --typography-label-2-font-size: 13px;
+  --typography-label-2-line-height: 18px;
+  --typography-label-2-letter-spacing: 0.0194em;
+
+  /* Caption */
+  --typography-caption-1-font-size: 12px;
+  --typography-caption-1-line-height: 16px;
+  --typography-caption-1-letter-spacing: 0.0252em;
+  --typography-caption-2-font-size: 11px;
+  --typography-caption-2-line-height: 14px;
+  --typography-caption-2-letter-spacing: 0.0311em;
 }
 
 /* Dark Mode Overrides */
