@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Badge } from '../../shared/ui/badge';
-import { Button } from '../../shared/ui/button';
+import { Badge } from '../ui/badge';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import {
+  Table as UITable,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from '../ui/table';
+import { cn } from '../lib/utils';
 import { getTypeByUserRole } from '@/features/user/user.service';
 import { UserRoleValueLabelMap, type UserRoleType } from '@/features/user/type';
 import { getArticleTypeFromStatus } from '@/features/article/article.service';
@@ -17,11 +27,10 @@ interface Column {
 }
 
 // 🚨 Bad Practice: UI 컴포넌트가 도메인 타입을 알고 있음
-interface TableProps {
+interface DataTableProps {
   columns?: Column[];
   data?: any[];
   striped?: boolean;
-  bordered?: boolean;
   hover?: boolean;
   pageSize?: number;
   searchable?: boolean;
@@ -37,11 +46,10 @@ interface TableProps {
   onRestore?: (id: number) => void;
 }
 
-export const Table: React.FC<TableProps> = ({
+export const DataTable: React.FC<DataTableProps> = ({
   columns,
   data = [],
   striped = false,
-  bordered = false,
   hover = false,
   pageSize = 10,
   searchable = false,
@@ -103,15 +111,6 @@ export const Table: React.FC<TableProps> = ({
   );
 
   const totalPages = Math.ceil(filteredData.length / pageSize);
-
-  const tableClasses = [
-    'table',
-    striped && 'table-striped',
-    bordered && 'table-bordered',
-    hover && 'table-hover',
-  ]
-    .filter(Boolean)
-    .join(' ');
 
   const actualColumns =
     columns ||
@@ -251,105 +250,88 @@ export const Table: React.FC<TableProps> = ({
   };
 
   return (
-    <div className="table-container">
+    <div className="w-full">
       {searchable && (
-        <div style={{ marginBottom: '16px' }}>
-          <input
+        <div className="mb-4">
+          <Input
             type="text"
             placeholder="검색..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            style={{
-              padding: '8px 12px',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              width: '300px',
-            }}
+            className="w-[300px]"
           />
         </div>
       )}
 
-      <table className={tableClasses}>
-        <thead>
-          <tr>
+      <UITable>
+        <TableHeader>
+          <TableRow>
             {actualColumns.map((column) => (
-              <th
+              <TableHead
                 key={column.key}
                 style={column.width ? { width: column.width } : undefined}
                 onClick={() => sortable && handleSort(column.key)}
+                className={cn(
+                  sortable &&
+                    'cursor-pointer hover:bg-[var(--color-component-fill-normal)]',
+                )}
               >
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    cursor: sortable ? 'pointer' : 'default',
-                  }}
-                >
+                <div className="flex items-center gap-1">
                   {column.header}
                   {sortable && sortColumn === column.key && (
-                    <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>
+                    <span className="text-[var(--color-semantic-label-alternative)]">
+                      {sortDirection === 'asc' ? '↑' : '↓'}
+                    </span>
                   )}
                 </div>
-              </th>
+              </TableHead>
             ))}
-          </tr>
-        </thead>
-        <tbody>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {paginatedData.map((row, rowIndex) => (
-            <tr
+            <TableRow
               key={rowIndex}
               onClick={() => onRowClick?.(row)}
-              style={{ cursor: onRowClick ? 'pointer' : 'default' }}
+              className={cn(
+                onRowClick && 'cursor-pointer',
+                striped &&
+                  rowIndex % 2 === 0 &&
+                  'bg-[var(--color-semantic-background-normal-alternative)]',
+                hover && 'hover:bg-[var(--color-component-fill-normal)]',
+              )}
             >
               {actualColumns.map((column) => (
-                <td key={column.key}>
+                <TableCell key={column.key}>
                   {entityType ? renderCell(row, column.key) : row[column.key]}
-                </td>
+                </TableCell>
               ))}
-            </tr>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </UITable>
 
       {totalPages > 1 && (
-        <div
-          style={{
-            marginTop: '16px',
-            display: 'flex',
-            gap: '8px',
-            justifyContent: 'center',
-          }}
-        >
-          <button
+        <div className="mt-4 flex items-center justify-center gap-2">
+          <Button
+            size="sm"
+            variant="secondary"
             onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
             disabled={currentPage === 1}
-            style={{
-              padding: '6px 12px',
-              border: '1px solid #ddd',
-              background: 'white',
-              borderRadius: '4px',
-              cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
-            }}
           >
             이전
-          </button>
-          <span style={{ padding: '6px 12px' }}>
+          </Button>
+          <span className="px-3 py-1.5 text-sm text-[var(--color-semantic-label-alternative)]">
             {currentPage} / {totalPages}
           </span>
-          <button
+          <Button
+            size="sm"
+            variant="secondary"
             onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
-            style={{
-              padding: '6px 12px',
-              border: '1px solid #ddd',
-              background: 'white',
-              borderRadius: '4px',
-              cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
-            }}
           >
             다음
-          </button>
+          </Button>
         </div>
       )}
     </div>

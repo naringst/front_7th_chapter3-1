@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, Table } from '../components/organisms';
+import { Alert } from '../components/organisms';
+import { DataTable } from '../shared/components';
 import { userService } from '../services/userService';
 import { postService } from '../services/postService';
 import type { User } from '../services/userService';
@@ -450,7 +451,7 @@ export const ManagementPage: React.FC = () => {
               className="overflow-auto rounded border bg-[var(--color-semantic-background-elevated-normal)] transition-colors"
               style={{ borderColor: 'var(--color-semantic-line-solid-normal)' }}
             >
-              <Table
+              <DataTable
                 columns={renderTableColumns()}
                 data={data}
                 striped
