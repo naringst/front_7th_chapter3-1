@@ -13,6 +13,7 @@ import {
   DialogTitle,
   DialogFooter,
 } from '@/shared/ui/dialog';
+import { CardBase, CardContent } from '@/shared/ui/card';
 import { UserForm, type UserFormData } from '@/features/user/UserForm';
 import {
   ArticleForm,
@@ -299,69 +300,40 @@ export const ManagementPage: React.FC = () => {
   const stats = getStats();
 
   return (
-    <div style={{ minHeight: '100vh', background: '#f0f0f0' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
-        <div style={{ marginBottom: '20px' }}>
-          <h1
-            style={{
-              fontSize: '24px',
-              fontWeight: 'bold',
-              marginBottom: '5px',
-              color: '#333',
-            }}
-          >
+    <div className="min-h-screen bg-[var(--color-semantic-background-normal-normal)] transition-colors">
+      <div className="mx-auto max-w-[1200px] p-5">
+        <div className="mb-5">
+          <h1 className="mb-1 text-2xl font-bold text-[var(--color-semantic-label-strong)]">
             관리 시스템
           </h1>
-          <p style={{ color: '#666', fontSize: '14px' }}>
+          <p className="text-sm text-[var(--color-semantic-label-assistive)]">
             사용자와 게시글을 관리하세요
           </p>
         </div>
 
         <div
-          style={{
-            background: 'white',
-            border: '1px solid #ddd',
-            padding: '10px',
-          }}
+          className="rounded-lg border bg-[var(--color-semantic-background-elevated-normal)] p-2.5 transition-colors"
+          style={{ borderColor: 'var(--color-semantic-line-solid-normal)' }}
         >
           <div
-            style={{
-              marginBottom: '15px',
-              borderBottom: '2px solid #ccc',
-              paddingBottom: '5px',
-            }}
+            className="mb-4 border-b pb-1"
+            style={{ borderColor: 'var(--color-semantic-line-normal-neutral)' }}
           >
-            <button
+            <Button
+              variant={entityType === 'post' ? 'primary' : 'secondary'}
+              size="sm"
               onClick={() => setEntityType('post')}
-              style={{
-                padding: '8px 16px',
-                marginRight: '5px',
-                fontSize: '14px',
-                fontWeight: entityType === 'post' ? 'bold' : 'normal',
-                border: '1px solid #999',
-                background: entityType === 'post' ? '#1976d2' : '#f5f5f5',
-                color: entityType === 'post' ? 'white' : '#333',
-                cursor: 'pointer',
-                borderRadius: '3px',
-              }}
+              className="mr-1"
             >
               게시글
-            </button>
-            <button
+            </Button>
+            <Button
+              variant={entityType === 'user' ? 'primary' : 'secondary'}
+              size="sm"
               onClick={() => setEntityType('user')}
-              style={{
-                padding: '8px 16px',
-                fontSize: '14px',
-                fontWeight: entityType === 'user' ? 'bold' : 'normal',
-                border: '1px solid #999',
-                background: entityType === 'user' ? '#1976d2' : '#f5f5f5',
-                color: entityType === 'user' ? 'white' : '#333',
-                cursor: 'pointer',
-                borderRadius: '3px',
-              }}
             >
               사용자
-            </button>
+            </Button>
           </div>
 
           <div>
@@ -400,161 +372,83 @@ export const ManagementPage: React.FC = () => {
               </div>
             )}
 
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
-                gap: '10px',
-                marginBottom: '15px',
-              }}
-            >
-              <div
-                style={{
-                  padding: '12px 15px',
-                  background: '#e3f2fd',
-                  border: '1px solid #90caf9',
-                  borderRadius: '3px',
-                }}
+            <div className="mb-4 grid grid-cols-[repeat(auto-fit,minmax(130px,1fr))] gap-2.5">
+              <CardBase
+                className="!rounded !border !p-3 !py-3 !gap-0 transition-colors bg-[var(--color-atomic-lightBlue-99)] shadow-none"
+                style={{ borderColor: 'var(--color-atomic-lightBlue-80)' }}
               >
-                <div
-                  style={{
-                    fontSize: '12px',
-                    color: '#666',
-                    marginBottom: '4px',
-                  }}
-                >
-                  전체
-                </div>
-                <div
-                  style={{
-                    fontSize: '24px',
-                    fontWeight: 'bold',
-                    color: '#1976d2',
-                  }}
-                >
-                  {stats.total}
-                </div>
-              </div>
+                <CardContent className="!p-0">
+                  <div className="mb-1 text-xs text-[var(--color-semantic-label-alternative)]">
+                    전체
+                  </div>
+                  <div className="text-2xl font-bold text-[var(--color-semantic-accent-foreground-lightBlue)]">
+                    {stats.total}
+                  </div>
+                </CardContent>
+              </CardBase>
 
-              <div
-                style={{
-                  padding: '12px 15px',
-                  background: '#e8f5e9',
-                  border: '1px solid #81c784',
-                  borderRadius: '3px',
-                }}
+              <CardBase
+                className="!rounded !border !p-3 !py-3 !gap-0 transition-colors bg-[var(--color-atomic-green-99)] shadow-none"
+                style={{ borderColor: 'var(--color-atomic-green-80)' }}
               >
-                <div
-                  style={{
-                    fontSize: '12px',
-                    color: '#666',
-                    marginBottom: '4px',
-                  }}
-                >
-                  {stats.stat1.label}
-                </div>
-                <div
-                  style={{
-                    fontSize: '24px',
-                    fontWeight: 'bold',
-                    color: '#388e3c',
-                  }}
-                >
-                  {stats.stat1.value}
-                </div>
-              </div>
+                <CardContent className="!p-0">
+                  <div className="mb-1 text-xs text-[var(--color-semantic-label-alternative)]">
+                    {stats.stat1.label}
+                  </div>
+                  <div className="text-2xl font-bold text-[var(--color-semantic-accent-foreground-green)]">
+                    {stats.stat1.value}
+                  </div>
+                </CardContent>
+              </CardBase>
 
-              <div
-                style={{
-                  padding: '12px 15px',
-                  background: '#fff3e0',
-                  border: '1px solid #ffb74d',
-                  borderRadius: '3px',
-                }}
+              <CardBase
+                className="!rounded !border !p-3 !py-3 !gap-0 transition-colors bg-[var(--color-atomic-orange-99)] shadow-none"
+                style={{ borderColor: 'var(--color-atomic-orange-80)' }}
               >
-                <div
-                  style={{
-                    fontSize: '12px',
-                    color: '#666',
-                    marginBottom: '4px',
-                  }}
-                >
-                  {stats.stat2.label}
-                </div>
-                <div
-                  style={{
-                    fontSize: '24px',
-                    fontWeight: 'bold',
-                    color: '#f57c00',
-                  }}
-                >
-                  {stats.stat2.value}
-                </div>
-              </div>
+                <CardContent className="!p-0">
+                  <div className="mb-1 text-xs text-[var(--color-semantic-label-alternative)]">
+                    {stats.stat2.label}
+                  </div>
+                  <div className="text-2xl font-bold text-[var(--color-semantic-accent-foreground-orange)]">
+                    {stats.stat2.value}
+                  </div>
+                </CardContent>
+              </CardBase>
 
-              <div
-                style={{
-                  padding: '12px 15px',
-                  background: '#ffebee',
-                  border: '1px solid #e57373',
-                  borderRadius: '3px',
-                }}
+              <CardBase
+                className="!rounded !border !p-3 !py-3 !gap-0 transition-colors bg-[var(--color-atomic-red-99)] shadow-none"
+                style={{ borderColor: 'var(--color-atomic-red-80)' }}
               >
-                <div
-                  style={{
-                    fontSize: '12px',
-                    color: '#666',
-                    marginBottom: '4px',
-                  }}
-                >
-                  {stats.stat3.label}
-                </div>
-                <div
-                  style={{
-                    fontSize: '24px',
-                    fontWeight: 'bold',
-                    color: '#d32f2f',
-                  }}
-                >
-                  {stats.stat3.value}
-                </div>
-              </div>
+                <CardContent className="!p-0">
+                  <div className="mb-1 text-xs text-[var(--color-semantic-label-alternative)]">
+                    {stats.stat3.label}
+                  </div>
+                  <div className="text-2xl font-bold text-[var(--color-semantic-accent-foreground-red)]">
+                    {stats.stat3.value}
+                  </div>
+                </CardContent>
+              </CardBase>
 
-              <div
+              <CardBase
+                className="!rounded !border !p-3 !py-3 !gap-0 transition-colors bg-[var(--color-semantic-background-normal-alternative)] shadow-none"
                 style={{
-                  padding: '12px 15px',
-                  background: '#f5f5f5',
-                  border: '1px solid #bdbdbd',
-                  borderRadius: '3px',
+                  borderColor: 'var(--color-semantic-line-solid-neutral)',
                 }}
               >
-                <div
-                  style={{
-                    fontSize: '12px',
-                    color: '#666',
-                    marginBottom: '4px',
-                  }}
-                >
-                  {stats.stat4.label}
-                </div>
-                <div
-                  style={{
-                    fontSize: '24px',
-                    fontWeight: 'bold',
-                    color: '#424242',
-                  }}
-                >
-                  {stats.stat4.value}
-                </div>
-              </div>
+                <CardContent className="!p-0">
+                  <div className="mb-1 text-xs text-[var(--color-semantic-label-alternative)]">
+                    {stats.stat4.label}
+                  </div>
+                  <div className="text-2xl font-bold text-[var(--color-semantic-label-normal)]">
+                    {stats.stat4.value}
+                  </div>
+                </CardContent>
+              </CardBase>
             </div>
 
             <div
-              style={{
-                border: '1px solid #ddd',
-                background: 'white',
-                overflow: 'auto',
-              }}
+              className="overflow-auto rounded border bg-[var(--color-semantic-background-elevated-normal)] transition-colors"
+              style={{ borderColor: 'var(--color-semantic-line-solid-normal)' }}
             >
               <Table
                 columns={renderTableColumns()}

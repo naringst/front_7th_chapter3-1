@@ -1,123 +1,42 @@
 import React from 'react';
+import { ThemeToggle } from '../ThemeToggle';
 
 export const Header: React.FC = () => {
   return (
     <header
+      className="sticky top-0 z-50 border-b bg-[var(--color-semantic-background-elevated-normal)] shadow-[var(--style-semantic-shadow-normal)] transition-colors"
       style={{
-        backgroundColor: '#ffffff',
-        borderBottom: '1px solid #e5e7eb',
-        boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
-        position: 'sticky',
-        top: 0,
-        zIndex: 1000,
+        borderColor: 'var(--color-semantic-line-solid-normal)',
       }}
     >
-      <div
-        style={{
-          maxWidth: '1400px',
-          margin: '0 auto',
-          padding: '0 24px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          height: '64px',
-        }}
-      >
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 h-16">
         {/* Logo */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-          }}
-        >
-          <div
-            style={{
-              width: '40px',
-              height: '40px',
-              backgroundColor: '#007bff',
-              borderRadius: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#ffffff',
-              fontWeight: 'bold',
-              fontSize: '20px',
-            }}
-          >
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--color-semantic-primary-normal)] text-[var(--color-semantic-static-white)] text-xl font-bold">
             L
           </div>
           <div>
-            <h1
-              style={{
-                fontSize: '18px',
-                fontWeight: '700',
-                color: '#1a202c',
-                margin: 0,
-                lineHeight: 1,
-              }}
-            >
+            <h1 className="m-0 text-lg font-bold leading-none text-[var(--color-semantic-label-strong)]">
               Hanghae Company
             </h1>
-            <p
-              style={{
-                fontSize: '11px',
-                color: '#718096',
-                margin: 0,
-                lineHeight: 1,
-                marginTop: '2px',
-              }}
-            >
+            <p className="m-0 mt-0.5 text-xs leading-none text-[var(--color-semantic-label-assistive)]">
               Design System Migration Project
             </p>
           </div>
         </div>
 
-        {/* User Info */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-          }}
-        >
-          <div
-            style={{
-              textAlign: 'right',
-            }}
-          >
-            <div
-              style={{
-                fontSize: '14px',
-                fontWeight: '600',
-                color: '#1a202c',
-              }}
-            >
+        {/* User Info & Theme Toggle */}
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <div className="text-right">
+            <div className="text-sm font-semibold text-[var(--color-semantic-label-strong)]">
               Demo User
             </div>
-            <div
-              style={{
-                fontSize: '12px',
-                color: '#718096',
-              }}
-            >
+            <div className="text-xs text-[var(--color-semantic-label-assistive)]">
               demo@example.com
             </div>
           </div>
-          <div
-            style={{
-              width: '40px',
-              height: '40px',
-              borderRadius: '50%',
-              backgroundColor: '#e3f2fd',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#007bff',
-              fontWeight: '600',
-              fontSize: '16px',
-            }}
-          >
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-semantic-primary-normal)]/10 text-[var(--color-semantic-primary-normal)] text-base font-semibold">
             DU
           </div>
         </div>
