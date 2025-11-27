@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Badge } from '../components/atoms';
+import { Badge } from '../components/ui/badge';
 import { Alert, Table, Modal } from '../components/organisms';
 import { FormInput, FormSelect, FormTextarea } from '../components/molecules';
 import { userService } from '../services/userService';

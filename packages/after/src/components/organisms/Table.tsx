@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Badge } from '../atoms/Badge';
+import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import { getTypeByUserRole } from '@/features/user/user.service';
 import { UserRoleValueLabelMap, type UserRoleType } from '@/features/user/type';
@@ -146,7 +146,7 @@ export const Table: React.FC<TableProps> = ({
             : 'rejected';
         return (
           <Badge type={getArticleTypeFromStatus(badgeStatus)} showIcon>
-            {articleStatusValueMap[value as ArticleStatusType]}
+            {articleStatusValueMap[badgeStatus as ArticleStatusType]}
           </Badge>
         );
       }
