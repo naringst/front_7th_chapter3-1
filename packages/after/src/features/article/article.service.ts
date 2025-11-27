@@ -1,5 +1,5 @@
 import { ArticleStatus, type ArticleStatusType } from './enum';
-import { BadgeType, type BadgeTypeType } from '../../components/ui/enum';
+import { BadgeType, type BadgeTypeType } from '../../shared/ui/enum';
 
 export const getArticleTypeFromStatus = (
   status: ArticleStatusType,

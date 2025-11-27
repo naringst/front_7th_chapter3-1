@@ -7,10 +7,10 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+} from '@/shared/ui/form';
+import { Input } from '@/shared/ui/input';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/lib/utils';
 import { validatePostTitle } from '../../article.service';
 import { FormSelect } from '@/features/common/components/form/FormSelect';
 

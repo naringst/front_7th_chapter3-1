@@ -4,8 +4,8 @@ import {
   FormLabel,
   FormControl,
   FormDescription,
-} from '@/components/ui/form';
-import { cn } from '@/lib/utils';
+} from '@/shared/ui/form';
+import { cn } from '@/shared/lib/utils';
 
 interface FormTextareaProps {
   name: string;

@@ -7,8 +7,8 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+} from '@/shared/ui/form';
+import { Input } from '@/shared/ui/input';
 import { validateUserName, validateEmail } from './user.service';
 import { FormSelect } from '../common/components/form/FormSelect';
 

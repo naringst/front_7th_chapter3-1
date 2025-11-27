@@ -1,12 +1,12 @@
 import React from 'react';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/shared/ui/input';
 import {
   FormItem,
   FormLabel,
   FormControl,
   FormDescription,
-} from '@/components/ui/form';
-import { cn } from '@/lib/utils';
+} from '@/shared/ui/form';
+import { cn } from '@/shared/lib/utils';
 
 // 순수 UI 컴포넌트 - 비즈니스 로직 제거
 interface FormInputProps {

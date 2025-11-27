@@ -1,5 +1,5 @@
 import { UserRole, type UserRoleType } from './type';
-import { BadgeType, type BadgeTypeType } from '../../components/ui/enum';
+import { BadgeType, type BadgeTypeType } from '../../shared/ui/enum';
 
 export const getTypeByUserRole = (userRole: UserRoleType): BadgeTypeType => {
   let actualType: BadgeTypeType;

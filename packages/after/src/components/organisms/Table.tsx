@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Badge } from '../ui/badge';
-import { Button } from '../ui/button';
+import { Badge } from '../../shared/ui/badge';
+import { Button } from '../../shared/ui/button';
 import { getTypeByUserRole } from '@/features/user/user.service';
 import { UserRoleValueLabelMap, type UserRoleType } from '@/features/user/type';
 import { getArticleTypeFromStatus } from '@/features/article/article.service';

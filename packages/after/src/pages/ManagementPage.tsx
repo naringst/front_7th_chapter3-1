@@ -5,7 +5,7 @@ import { postService } from '../services/postService';
 import type { User } from '../services/userService';
 import type { Post } from '../services/postService';
 import '../styles/components.css';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/shared/ui/button';
 import { UserForm, type UserFormData } from '@/features/user/UserForm';
 import {
   ArticleForm,
