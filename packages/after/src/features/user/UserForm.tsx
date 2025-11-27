@@ -61,110 +61,112 @@ export const UserForm: React.FC<UserFormProps> = ({ value, onChange }) => {
 
   return (
     <Form {...form}>
-      <FormField
-        control={form.control}
-        name="username"
-        rules={{
-          required: '사용자명을 입력해주세요',
-          validate: (value: string | undefined) => {
-            if (!value) return true; // required는 별도 처리
-            const error = validateUserName(value, false);
-            return error || true;
-          },
-        }}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>
-              사용자명
-              <span className="text-destructive ml-1">*</span>
-            </FormLabel>
-            <FormControl>
-              <Input
-                {...field}
-                value={field.value || ''}
-                onChange={(e) => {
-                  field.onChange(e);
-                  handleFieldChange('username')(e.target.value);
-                }}
-                onBlur={field.onBlur}
-                placeholder="사용자명을 입력하세요"
-                className="w-full"
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        control={form.control}
-        name="email"
-        rules={{
-          required: '이메일을 입력해주세요',
-          validate: (value: string | undefined) => {
-            if (!value) return true; // required는 별도 처리
-            const error = validateEmail(value, false);
-            return error || true;
-          },
-        }}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>
-              이메일
-              <span className="text-destructive ml-1">*</span>
-            </FormLabel>
-            <FormControl>
-              <Input
-                {...field}
-                type="email"
-                value={field.value || ''}
-                onChange={(e) => {
-                  field.onChange(e);
-                  handleFieldChange('email')(e.target.value);
-                }}
-                onBlur={field.onBlur}
-                placeholder="이메일을 입력하세요"
-                className="w-full"
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <div className="grid grid-cols-2 gap-4">
+      <div className="space-y-6">
         <FormField
           control={form.control}
-          name="role"
+          name="username"
+          rules={{
+            required: '사용자명을 입력해주세요',
+            validate: (value: string | undefined) => {
+              if (!value) return true; // required는 별도 처리
+              const error = validateUserName(value, false);
+              return error || true;
+            },
+          }}
           render={({ field }) => (
-            <FormSelect
-              name={field.name}
-              value={field.value || 'user'}
-              onChange={handleFieldChange('role')}
-              options={[
-                { value: 'user', label: '사용자' },
-                { value: 'moderator', label: '운영자' },
-                { value: 'admin', label: '관리자' },
-              ]}
-              label="역할"
-            />
+            <FormItem>
+              <FormLabel>
+                사용자명
+                <span className="text-destructive ml-1">*</span>
+              </FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  value={field.value || ''}
+                  onChange={(e) => {
+                    field.onChange(e);
+                    handleFieldChange('username')(e.target.value);
+                  }}
+                  onBlur={field.onBlur}
+                  placeholder="사용자명을 입력하세요"
+                  className="w-full"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
           )}
         />
         <FormField
           control={form.control}
-          name="status"
+          name="email"
+          rules={{
+            required: '이메일을 입력해주세요',
+            validate: (value: string | undefined) => {
+              if (!value) return true; // required는 별도 처리
+              const error = validateEmail(value, false);
+              return error || true;
+            },
+          }}
           render={({ field }) => (
-            <FormSelect
-              name={field.name}
-              value={field.value || 'active'}
-              onChange={handleFieldChange('status')}
-              options={[
-                { value: 'active', label: '활성' },
-                { value: 'inactive', label: '비활성' },
-                { value: 'suspended', label: '정지' },
-              ]}
-              label="상태"
-            />
+            <FormItem>
+              <FormLabel>
+                이메일
+                <span className="text-destructive ml-1">*</span>
+              </FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  type="email"
+                  value={field.value || ''}
+                  onChange={(e) => {
+                    field.onChange(e);
+                    handleFieldChange('email')(e.target.value);
+                  }}
+                  onBlur={field.onBlur}
+                  placeholder="이메일을 입력하세요"
+                  className="w-full"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
           )}
         />
+        <div className="grid grid-cols-2 gap-6">
+          <FormField
+            control={form.control}
+            name="role"
+            render={({ field }) => (
+              <FormSelect
+                name={field.name}
+                value={field.value || 'user'}
+                onChange={handleFieldChange('role')}
+                options={[
+                  { value: 'user', label: '사용자' },
+                  { value: 'moderator', label: '운영자' },
+                  { value: 'admin', label: '관리자' },
+                ]}
+                label="역할"
+              />
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="status"
+            render={({ field }) => (
+              <FormSelect
+                name={field.name}
+                value={field.value || 'active'}
+                onChange={handleFieldChange('status')}
+                options={[
+                  { value: 'active', label: '활성' },
+                  { value: 'inactive', label: '비활성' },
+                  { value: 'suspended', label: '정지' },
+                ]}
+                label="상태"
+              />
+            )}
+          />
+        </div>
       </div>
     </Form>
   );

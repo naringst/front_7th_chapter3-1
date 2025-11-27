@@ -69,51 +69,22 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
 
   return (
     <Form {...form}>
-      <FormField
-        control={form.control}
-        name="title"
-        rules={{
-          required: '제목을 입력해주세요',
-          validate: (value: string | undefined) => {
-            if (!value) return true; // required는 별도 처리
-            const error = validatePostTitle(value, false);
-            return error || true;
-          },
-        }}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>
-              제목
-              <span className="text-destructive ml-1">*</span>
-            </FormLabel>
-            <FormControl>
-              <Input
-                {...field}
-                value={field.value || ''}
-                onChange={(e) => {
-                  field.onChange(e);
-                  handleFieldChange('title')(e.target.value);
-                }}
-                onBlur={field.onBlur}
-                placeholder="게시글 제목을 입력하세요"
-                className="w-full"
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <div className="grid grid-cols-2 gap-4">
+      <div className="space-y-6">
         <FormField
           control={form.control}
-          name="author"
+          name="title"
           rules={{
-            required: '작성자를 입력해주세요',
+            required: '제목을 입력해주세요',
+            validate: (value: string | undefined) => {
+              if (!value) return true; // required는 별도 처리
+              const error = validatePostTitle(value, false);
+              return error || true;
+            },
           }}
           render={({ field }) => (
             <FormItem>
               <FormLabel>
-                작성자
+                제목
                 <span className="text-destructive ml-1">*</span>
               </FormLabel>
               <FormControl>
@@ -122,10 +93,10 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
                   value={field.value || ''}
                   onChange={(e) => {
                     field.onChange(e);
-                    handleFieldChange('author')(e.target.value);
+                    handleFieldChange('title')(e.target.value);
                   }}
                   onBlur={field.onBlur}
-                  placeholder="작성자명"
+                  placeholder="게시글 제목을 입력하세요"
                   className="w-full"
                 />
               </FormControl>
@@ -133,60 +104,113 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
             </FormItem>
           )}
         />
+        <div className="grid grid-cols-2 gap-6">
+          <FormField
+            control={form.control}
+            name="author"
+            rules={{
+              required: '작성자를 입력해주세요',
+            }}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  작성자
+                  <span className="text-destructive ml-1">*</span>
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    value={field.value || ''}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      handleFieldChange('author')(e.target.value);
+                    }}
+                    onBlur={field.onBlur}
+                    placeholder="작성자명"
+                    className="w-full"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="category"
+            render={({ field }) => (
+              <FormSelect
+                name={field.name}
+                value={field.value || ''}
+                onChange={(value) => {
+                  field.onChange(value);
+                  handleFieldChange('category')(value);
+                }}
+                onBlur={field.onBlur}
+                options={[
+                  { value: 'development', label: 'Development' },
+                  { value: 'design', label: 'Design' },
+                  { value: 'accessibility', label: 'Accessibility' },
+                ]}
+                label="카테고리"
+                placeholder="카테고리 선택"
+              />
+            )}
+          />
+        </div>
         <FormField
           control={form.control}
-          name="category"
+          name="status"
           render={({ field }) => (
             <FormSelect
               name={field.name}
               value={field.value || ''}
               onChange={(value) => {
                 field.onChange(value);
-                handleFieldChange('category')(value);
+                handleFieldChange('status')(value);
               }}
               onBlur={field.onBlur}
               options={[
-                { value: 'development', label: 'Development' },
-                { value: 'design', label: 'Design' },
-                { value: 'accessibility', label: 'Accessibility' },
+                { value: 'draft', label: '임시저장' },
+                { value: 'published', label: '게시됨' },
+                { value: 'archived', label: '보관됨' },
               ]}
-              label="카테고리"
-              placeholder="카테고리 선택"
+              label="상태"
+              placeholder="상태 선택"
             />
           )}
         />
+        <FormField
+          control={form.control}
+          name="content"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>내용</FormLabel>
+              <FormControl>
+                <textarea
+                  {...field}
+                  value={field.value || ''}
+                  onChange={(e) => {
+                    field.onChange(e);
+                    handleFieldChange('content')(e.target.value);
+                  }}
+                  onBlur={field.onBlur}
+                  placeholder="게시글 내용을 입력하세요"
+                  rows={6}
+                  className={cn(
+                    'flex min-h-[80px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs transition-[color,box-shadow] outline-none',
+                    'placeholder:text-muted-foreground',
+                    'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
+                    'disabled:cursor-not-allowed disabled:opacity-50',
+                    'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
+                    'resize-y',
+                  )}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
       </div>
-      <FormField
-        control={form.control}
-        name="content"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>내용</FormLabel>
-            <FormControl>
-              <textarea
-                {...field}
-                value={field.value || ''}
-                onChange={(e) => {
-                  field.onChange(e);
-                  handleFieldChange('content')(e.target.value);
-                }}
-                onBlur={field.onBlur}
-                placeholder="게시글 내용을 입력하세요"
-                rows={6}
-                className={cn(
-                  'flex min-h-[80px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs transition-[color,box-shadow] outline-none',
-                  'placeholder:text-muted-foreground',
-                  'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
-                  'disabled:cursor-not-allowed disabled:opacity-50',
-                  'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
-                  'resize-y',
-                )}
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
     </Form>
   );
 };
