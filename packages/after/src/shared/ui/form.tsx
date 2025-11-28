@@ -133,7 +133,10 @@ function FormDescription({ className, ...props }: React.ComponentProps<'p'>) {
     <p
       data-slot="form-description"
       id={formDescriptionId}
-      className={cn('text-sm text-[var(--color-semantic-label-assistive)]', className)}
+      className={cn(
+        'text-sm text-[var(--color-semantic-label-assistive)]',
+        className,
+      )}
       {...props}
     />
   );
@@ -151,7 +154,10 @@ function FormMessage({ className, ...props }: React.ComponentProps<'p'>) {
     <p
       data-slot="form-message"
       id={formMessageId}
-      className={cn('text-sm text-[var(--color-semantic-status-negative)]', className)}
+      className={cn(
+        'text-sm text-[var(--color-semantic-status-negative)]',
+        className,
+      )}
       {...props}
     >
       {body}
@@ -160,7 +166,6 @@ function FormMessage({ className, ...props }: React.ComponentProps<'p'>) {
 }
 
 export {
-  useFormField,
   Form,
   FormItem,
   FormLabel,
